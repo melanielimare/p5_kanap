@@ -36,11 +36,7 @@ fetch(url).then((res) =>
 
     let itemImg = document.querySelectorAll('.item__img');
     let currentUrl = window.location.href;
-    var name = url.searchParams.get("id");
+   
     console.log(name);
   })
 );
-
-
-
-
