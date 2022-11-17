@@ -14,8 +14,7 @@ fetch(url).then((res) =>
       let anchorNbr = document.querySelectorAll('#items a')[i];
       anchorNbr.setAttribute('href', `./product.html?id=${data[i]._id}`)
 
-      /* Création des Articles */     
-      anchorNbr.appendChild(document.createElement('article'));
+      /* Création des Articles */      anchorNbr.appendChild(document.createElement('article'));
       let articleNbr = document.querySelectorAll('#items a article')[i];
 
       /* Creation des images, title H3 et paragraphe */ 
@@ -26,7 +25,7 @@ fetch(url).then((res) =>
       let titleNbr = document.querySelectorAll('#items h3')[i];
       let paragraphNbr = document.querySelectorAll('#items p')[i];
 
-      /* Définition du contenu & attributs */
+/* Définition du contenu & attributs */
       imgNbr.setAttribute('src', data[i].imageUrl);
       imgNbr.setAttribute('alt', data[i].altTxt);
       titleNbr.setAttribute('class', data[i].name);
@@ -36,7 +35,10 @@ fetch(url).then((res) =>
 
     let itemImg = document.querySelectorAll('.item__img');
     let currentUrl = window.location.href;
-   
-    console.log(name);
   })
+  
 );
+
+
+
+

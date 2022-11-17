@@ -1,16 +1,11 @@
 const url = `http://localhost:3000/api/products`;
 let id = new URL(window.location.href).searchParams.get("id");
 let cartObject = [];
-
 let product = document.querySelector(".item");
 
 fetch(`http://localhost:3000/api/products/`+id)
 .then((res) =>
   res.json().then((data) => {
-     
-      // On debug pour être sur de voir toutes les données (à commenter un fois fini)
-      console.log(data);
-
       // On prépare le tableau des couleurs
       let select_color = `<option value="">--SVP, choisissez une couleur --</option>"`;
       data.colors.forEach(c => {
@@ -54,7 +49,8 @@ fetch(`http://localhost:3000/api/products/`+id)
 
       </div>
     </article>`;            
-
+// On debug pour être sur de voir toutes les données (à commenter un fois fini)
+console.log(data);
       // On vérifie la quantité (entre 0 et 100)
       function checkQuantity()
       { 
@@ -96,10 +92,12 @@ fetch(`http://localhost:3000/api/products/`+id)
             name: data.name,
             color: color,
             quantity: parseInt(quantity),
+            imageUrl: data.imageUrl,
+            altTxt: data.altTxt,
         };        
-
+       
         // On initialise notre cartObject, si il ne contient rien, on en fait un tableau vide
-        // Dans le code voir cartObject comme un caddie et cartItem comme un article dans le caddie (je sais c'est imagé, mais c'est le principe)
+        // Dans le code voir cartObject comme un caddie et cartItem comme un article dans le caddie 
         let currentLocalStorage = localStorage.getItem("cartObject") || [];
 
         // Est ce que l'on a déjà quelque chose dans le localStorage ? non, on pousse le canapé en cours dans le localStorage
