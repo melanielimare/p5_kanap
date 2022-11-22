@@ -129,7 +129,7 @@ function deleteItemCard() {
           updateCart();
 
           const deleteKanap = JSON.parse(localStorage.getItem("cartOject"));
-          if (!deleteKanap) {
+          if (deleteKanap===0) {
               localStorage.removeItem("cartObject");
               alert('Panier vide, retour à l\'accueil.');
               window.location.href = "index.html";
@@ -161,6 +161,10 @@ let order = document.getElementById("order");
 order.addEventListener("click", (e) => {
     e.preventDefault();
     /* création d'un tableau afin de récuperer les données de l'utilisateur */
+    var nameRegex = /^[a-zA-Z]+$/;
+    var addressRegex = /^[a-zA-Z0-9\s,'-]*$/;
+    var emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;     
+   
     let contact = {
         firstName: firstName.value,
         lastName: lastName.value,
@@ -175,26 +179,22 @@ order.addEventListener("click", (e) => {
         address.value === "" ||
         city.value === "" ||
         email.value === ""
-    ) {
-        alert("Vous devez renseigner vos coordonnées pour passer la commande !");
-        Sélectionnez
-        
-        function validate(){
-          var nameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
-          var nameRegex = /^([a-zA-Z ]){2,30}$/;
-          var adressRegex = /^[a-zA-Z0-9]*$/; 
-          var emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;     
-        }  
+    ) {       
+        alert("Vous devez renseigner vos coordonnées pour passer la commande !");     
+    }  
+    
+    if (
        
-    }  if (
-        nameRegex.test(firstName.value) == false ||
+        nameRegex.test(firstName.value) == false ||       
         nameRegex.test(lastName.value) == false ||
-        adressRegex.test(address.value) == false ||
+        addressRegex.test(address.value) == false ||
         nameRegex.test(city.value) == false ||
         emailRegex.test(email.value) == false
     ) {
+        //console.log(addressRegex.test(address.value));
         alert("Merci de renseigner correctement vos coordonnées !");
-    } else {
+    } 
+    else {
         let products = [];
         itemsInLocalStorage.forEach((order) => {
             products.push(order.id);
@@ -205,7 +205,6 @@ order.addEventListener("click", (e) => {
             products
         };
      
-      
         /* Appel à l'api order pour envoyer les tableaux */
         fetch("http://localhost:3000/api/products/order", {
             method: "POST",
